@@ -22,55 +22,72 @@ let screenInput = '';
 let calculationInput = '';
 let currNumber = '';
 
-// digits handler
-const handleDigits = function (target) {
-  const targetValue = target.innerText;
+// digits handlers
+const isZeroInputValid = function (targetValue) {
   const firstDigitMatch = currNumber.match(/\d/) ?? [''];
   const firstCurrNumChar = firstDigitMatch[0];
 
   if (firstCurrNumChar === '0' && !/^0\./.test(currNumber)) {
-    if (targetValue === '0') return;
+    if (targetValue === '0') return false;
     if (targetValue !== '.') {
       currNumber = targetValue;
       screenInput = screenInput.slice(0, -1) + currNumber;
       calculationInput = calculationInput.slice(0, -1) + currNumber;
-      return;
+      return false;
     }
   }
+  return true;
+};
 
+const isDotInputValid = function (targetValue) {
   const lastCurrNumChar = currNumber.slice(-1);
   if ((lastCurrNumChar === '.' || currNumber === '') && targetValue === '.') {
-    return;
+    return false;
   }
 
-  if (!'()'.includes(targetValue)) currNumber += targetValue;
+  return true;
+};
 
+const isParensInputValid = function (targetValue) {
   const openingParen = screenInput.match(/\(/g) ?? [];
   const closingParen = screenInput.match(/\)/g) ?? [];
   const lastInputChar = screenInput.slice(-1);
 
   if (
     targetValue === ')' &&
-    (openingParen.length <= closingParen.length || lastInputChar === '(')
+    (openingParen.length <= closingParen.length ||
+      lastInputChar === '(' ||
+      (isNaN(lastInputChar) && lastInputChar !== ')'))
   ) {
-    return;
+    return false;
   }
 
   if (
+    targetValue === '(' &&
     screenInput !== '' &&
-    !isNaN(Number(lastInputChar)) &&
-    targetValue === '('
+    !isNaN(Number(lastInputChar))
   ) {
-    return;
+    return false;
   }
 
   if (
     lastInputChar === ')' &&
     ('.('.includes(targetValue) || !isNaN(Number(targetValue)))
   ) {
-    return;
+    return false;
   }
 
+  return true;
+};
+
+const handleDigits = function (target) {
+  const targetValue = target.innerText;
+
+  if (!isZeroInputValid(targetValue)) return;
+  if (!isDotInputValid(targetValue)) return;
+  if (!isParensInputValid(targetValue)) return;
+
+  if (!'()'.includes(targetValue)) currNumber += targetValue;
   screenInput += targetValue;
   calculationInput += targetValue;
 };
