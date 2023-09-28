@@ -25,11 +25,10 @@ let currNumber = '';
 // digits handler
 const handleDigits = function (target) {
   const targetValue = target.innerText;
-  const firstDigitMatch = currNumber.match(/\d/);
-  const firstInputChar = firstDigitMatch !== null ? firstDigitMatch[0] : '';
-  const lastInputChar = currNumber.slice(-1);
+  const firstDigitMatch = currNumber.match(/\d/) ?? [''];
+  const firstCurrNumChar = firstDigitMatch[0];
 
-  if (firstInputChar === '0' && !/^0\./.test(currNumber)) {
+  if (firstCurrNumChar === '0' && !/^0\./.test(currNumber)) {
     if (targetValue === '0') return;
     if (targetValue !== '.') {
       currNumber = targetValue;
@@ -39,11 +38,38 @@ const handleDigits = function (target) {
     }
   }
 
-  if ((lastInputChar === '.' || currNumber === '') && targetValue === '.') {
+  const lastCurrNumChar = currNumber.slice(-1);
+  if ((lastCurrNumChar === '.' || currNumber === '') && targetValue === '.') {
     return;
   }
 
   if (!'()'.includes(targetValue)) currNumber += targetValue;
+
+  const openingParen = screenInput.match(/\(/g) ?? [];
+  const closingParen = screenInput.match(/\)/g) ?? [];
+  const lastInputChar = screenInput.slice(-1);
+
+  if (
+    targetValue === ')' &&
+    (openingParen.length <= closingParen.length || lastInputChar === '(')
+  ) {
+    return;
+  }
+
+  if (
+    screenInput !== '' &&
+    !isNaN(Number(lastInputChar)) &&
+    targetValue === '('
+  ) {
+    return;
+  }
+
+  if (
+    lastInputChar === ')' &&
+    ('.('.includes(targetValue) || !isNaN(Number(targetValue)))
+  ) {
+    return;
+  }
 
   screenInput += targetValue;
   calculationInput += targetValue;
@@ -64,7 +90,13 @@ const handleOperators = function (target) {
 
   if (screenInput === '' && targetValue !== '-') return;
 
-  if (isNaN(Number(lastInputChar)) && isNaN(Number(targetValue))) return;
+  if (
+    lastInputChar !== ')' &&
+    isNaN(Number(lastInputChar)) &&
+    isNaN(Number(targetValue))
+  ) {
+    return;
+  }
 
   const targetId = target.id;
 
@@ -97,6 +129,8 @@ const handleResultLength = function (result, maxLen) {
 
 const handleCalculation = function () {
   try {
+    if (calculationInput === '') return;
+
     currNumber = eval(calculationInput);
     if (isNaN(currNumber) || !isFinite(currNumber)) {
       throw new EvalError();
