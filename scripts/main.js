@@ -10,7 +10,7 @@ const multiply = document.getElementById('multiply');
 const divide = document.getElementById('divide');
 const modDivide = document.getElementById('mod-divide');
 
-// functions
+// functionalities
 const clear = document.getElementById('clear');
 const del = document.getElementById('delete');
 const equals = document.getElementById('equals');
@@ -22,6 +22,7 @@ let screenInput = '';
 let calculationInput = '';
 let currNumber = '';
 
+// digits handler
 const handleDigits = function (target) {
   const targetValue = target.innerText;
   const firstDigitMatch = currNumber.match(/\d/);
@@ -48,6 +49,7 @@ const handleDigits = function (target) {
   calculationInput += targetValue;
 };
 
+// operators handler
 const handleOperators = function (target) {
   currNumber = '';
   let targetValue = target.innerText;
@@ -73,6 +75,7 @@ const handleOperators = function (target) {
   screenInput += targetValue;
 };
 
+// functionalities handlers
 const handleClear = function () {
   currNumber = '';
   screenInput = '';
