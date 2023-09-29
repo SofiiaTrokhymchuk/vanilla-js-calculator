@@ -45,6 +45,8 @@ const isDotInputValid = function (targetValue) {
     return false;
   }
 
+  if (/\./.test(currNumber) && targetValue === '.') return;
+
   return true;
 };
 
