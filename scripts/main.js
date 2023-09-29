@@ -151,8 +151,16 @@ const handleCalculation = function () {
     if (calculationInput === '') return;
 
     currNumber = eval(calculationInput);
-    if (isNaN(currNumber) || !isFinite(currNumber)) {
-      throw new EvalError();
+    if (isNaN(currNumber)) {
+      const error = new Error('The result is not a number');
+      error.name = 'InvalidResultError';
+      throw error;
+    }
+
+    if (!isFinite(currNumber)) {
+      const error = new Error('The result is infinity or negative infinity');
+      error.name = 'InvalidResultError';
+      throw error;
     }
 
     currNumber = String(handleResultLength(currNumber, MAX_RESULT_LEN));
@@ -161,7 +169,11 @@ const handleCalculation = function () {
     calculatorResult.innerText = currNumber;
   } catch (error) {
     console.error(error);
-    alert('Entered invalid expression');
+    const message =
+      error.name === 'InvalidResultError'
+        ? error.message
+        : 'Entered invalid expression';
+    alert(message);
   }
 };
 
