@@ -3,18 +3,6 @@ const calculatorInput = document.querySelector('.screen-input');
 const calculatorResult = document.querySelector('.screen-result');
 const buttonsContainer = document.querySelector('.buttons-container');
 
-// operators
-const add = document.getElementById('add');
-const subctract = document.getElementById('substract');
-const multiply = document.getElementById('multiply');
-const divide = document.getElementById('divide');
-const modDivide = document.getElementById('mod-divide');
-
-// functionalities
-const clear = document.getElementById('clear');
-const del = document.getElementById('delete');
-const equals = document.getElementById('equals');
-
 const MAX_INPUT_LEN = 25;
 const MAX_RESULT_LEN = 13;
 
