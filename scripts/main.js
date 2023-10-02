@@ -1,3 +1,5 @@
+import InvalidResultError from './InvalidResultError.js';
+
 // calculator containers
 const calculatorInput = document.querySelector('.screen-input');
 const calculatorResult = document.querySelector('.screen-result');
@@ -140,15 +142,11 @@ const handleCalculation = function () {
 
     currNumber = eval(calculationInput);
     if (isNaN(currNumber)) {
-      const error = new Error('The result is not a number');
-      error.name = 'InvalidResultError';
-      throw error;
+      throw new InvalidResultError('not a number');
     }
 
     if (!isFinite(currNumber)) {
-      const error = new Error('The result is infinity or negative infinity');
-      error.name = 'InvalidResultError';
-      throw error;
+      throw new InvalidResultError('positive/negative infinity');
     }
 
     currNumber = String(handleResultLength(currNumber, MAX_RESULT_LEN));
