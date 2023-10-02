@@ -180,7 +180,7 @@ const isMaxInputLengthReached = function (maxLength) {
   return false;
 };
 
-buttonsContainer.addEventListener('click', (event) => {
+const buttonsContainerHandler = function (event) {
   const currTarget = event.target;
   const targetClasses = currTarget.className;
 
@@ -195,4 +195,8 @@ buttonsContainer.addEventListener('click', (event) => {
   }
 
   calculatorInput.innerText = screenInput;
-});
+};
+
+buttonsContainer.addEventListener('click', (event) =>
+  buttonsContainerHandler(event)
+);
