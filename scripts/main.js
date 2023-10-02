@@ -64,7 +64,7 @@ const isParensInputValid = function (targetValue) {
 
   if (
     lastInputChar === ')' &&
-    ('.('.includes(targetValue) || !Number.isNaN(Number(targetValue)))
+    (/\(|\./.test(targetValue) || !Number.isNaN(Number(targetValue)))
   ) {
     return false;
   }
@@ -79,7 +79,7 @@ const handleDigits = function (target) {
   if (!isDotInputValid(targetValue)) return;
   if (!isParensInputValid(targetValue)) return;
 
-  if (!'()'.includes(targetValue)) currNumber += targetValue;
+  if (!/\(|\)/.test(targetValue)) currNumber += targetValue;
   screenInput += targetValue;
   calculationInput += targetValue;
 };
