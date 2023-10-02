@@ -49,7 +49,7 @@ const isParensInputValid = function (targetValue) {
     targetValue === ')' &&
     (openingParen.length <= closingParen.length ||
       lastInputChar === '(' ||
-      (isNaN(lastInputChar) && lastInputChar !== ')'))
+      (Number.isNaN(lastInputChar) && lastInputChar !== ')'))
   ) {
     return false;
   }
@@ -57,14 +57,14 @@ const isParensInputValid = function (targetValue) {
   if (
     targetValue === '(' &&
     screenInput !== '' &&
-    !isNaN(Number(lastInputChar))
+    !Number.isNaN(Number(lastInputChar))
   ) {
     return false;
   }
 
   if (
     lastInputChar === ')' &&
-    ('.('.includes(targetValue) || !isNaN(Number(targetValue)))
+    ('.('.includes(targetValue) || !Number.isNaN(Number(targetValue)))
   ) {
     return false;
   }
@@ -101,8 +101,8 @@ const handleOperators = function (target) {
 
   if (
     lastInputChar !== ')' &&
-    isNaN(Number(lastInputChar)) &&
-    isNaN(Number(targetValue))
+    Number.isNaN(Number(lastInputChar)) &&
+    Number.isNaN(Number(targetValue))
   ) {
     return;
   }
@@ -141,11 +141,11 @@ const handleCalculation = function () {
     if (calculationInput === '') return;
 
     currNumber = eval(calculationInput);
-    if (isNaN(currNumber)) {
+    if (Number.isNaN(currNumber)) {
       throw new InvalidResultError('not a number');
     }
 
-    if (!isFinite(currNumber)) {
+    if (!Number.isFinite(currNumber)) {
       throw new InvalidResultError('positive/negative infinity');
     }
 
