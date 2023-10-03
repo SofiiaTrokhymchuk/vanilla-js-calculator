@@ -46,25 +46,25 @@ const isParensInputValid = function (targetValue) {
   const lastInputChar = screenInput.slice(-1);
 
   if (
-    targetValue === ')' &&
-    (openingParen.length <= closingParen.length ||
-      lastInputChar === '(' ||
-      (Number.isNaN(lastInputChar) && lastInputChar !== ')'))
+    targetValue === ')'
+    && (openingParen.length <= closingParen.length
+      || lastInputChar === '('
+      || (Number.isNaN(lastInputChar) && lastInputChar !== ')'))
   ) {
     return false;
   }
 
   if (
-    targetValue === '(' &&
-    screenInput !== '' &&
-    !Number.isNaN(Number(lastInputChar))
+    targetValue === '('
+    && screenInput !== ''
+    && !Number.isNaN(Number(lastInputChar))
   ) {
     return false;
   }
 
   if (
-    lastInputChar === ')' &&
-    (/\(|\./.test(targetValue) || !Number.isNaN(Number(targetValue)))
+    lastInputChar === ')'
+    && (/\(|\./.test(targetValue) || !Number.isNaN(Number(targetValue)))
   ) {
     return false;
   }
@@ -87,7 +87,7 @@ const handleDigits = function (target) {
 // operators handler
 const handleOperators = function (target) {
   currNumber = '';
-  let targetValue = target.innerText;
+  const targetValue = target.innerText;
   const lastInputChar = screenInput.slice(-1);
 
   if ((screenInput === '' || lastInputChar === '(') && targetValue === '-') {
@@ -100,9 +100,9 @@ const handleOperators = function (target) {
   if (screenInput === '' && targetValue !== '-') return;
 
   if (
-    lastInputChar !== ')' &&
-    Number.isNaN(Number(lastInputChar)) &&
-    Number.isNaN(Number(targetValue))
+    lastInputChar !== ')'
+    && Number.isNaN(Number(lastInputChar))
+    && Number.isNaN(Number(targetValue))
   ) {
     return;
   }
@@ -155,10 +155,9 @@ const handleCalculation = function () {
     calculatorResult.innerText = currNumber;
   } catch (error) {
     console.error(error);
-    const message =
-      error.name === 'InvalidResultError'
-        ? error.message
-        : 'Entered invalid expression';
+    const message = error.name === 'InvalidResultError'
+      ? error.message
+      : 'Entered invalid expression';
     alert(message);
   }
 };
@@ -197,6 +196,4 @@ const buttonsContainerHandler = function (event) {
   calculatorInput.innerText = screenInput;
 };
 
-buttonsContainer.addEventListener('click', (event) =>
-  buttonsContainerHandler(event)
-);
+buttonsContainer.addEventListener('click', (event) => buttonsContainerHandler(event));
