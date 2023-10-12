@@ -1,97 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
-    <link
-      rel="stylesheet"
-      href="styles/main.css"
-    />
-    <title>Document</title>
-  </head>
-  <body>
-    <div class="wrapper">
-      <div class="calculator">
-        <div class="calculator-screen">
-          <div class="screen-result">0</div>
-          <div class="screen-input">&nbsp;</div>
-        </div>
-        <div class="buttons-container">
-          <button
-            class="calculator-button calculator-button__functionality calculator-button__wide"
-            id="clear"
-          >
-            AC
-          </button>
-          <button
-            class="calculator-button calculator-button__functionality calculator-button__wide"
-            id="delete"
-          >
-            DEL
-          </button>
-          <button class="calculator-button calculator-button__digit">(</button>
-          <button class="calculator-button calculator-button__digit">)</button>
-          <button
-            class="calculator-button calculator-button__operator"
-            id="mod-divide"
-          >
-            %
-          </button>
-          <button
-            class="calculator-button calculator-button__operator"
-            id="divide"
-          >
-            ÷
-          </button>
-          <button class="calculator-button calculator-button__digit">7</button>
-          <button class="calculator-button calculator-button__digit">8</button>
-          <button class="calculator-button calculator-button__digit">9</button>
-          <button
-            class="calculator-button calculator-button__operator"
-            id="multiply"
-          >
-            ×
-          </button>
-          <button class="calculator-button calculator-button__digit">4</button>
-          <button class="calculator-button calculator-button__digit">5</button>
-          <button class="calculator-button calculator-button__digit">6</button>
-          <button
-            class="calculator-button calculator-button__operator"
-            id="substract"
-          >
-            -
-          </button>
-          <button class="calculator-button calculator-button__digit">1</button>
-          <button class="calculator-button calculator-button__digit">2</button>
-          <button class="calculator-button calculator-button__digit">3</button>
-          <button
-            class="calculator-button calculator-button__operator"
-            id="add"
-          >
-            +
-          </button>
-          <button
-            class="calculator-button calculator-button__digit calculator-button__wide"
-          >
-            0
-          </button>
-          <button class="calculator-button calculator-button__digit">.</button>
-          <button
-            class="calculator-button calculator-button__functionality"
-            id="equals"
-          >
-            =
-          </button>
-        </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JS Calculator</title>
+
+  <meta name="description"
+    content="This is a simple calculator that supports basic arithmetical operations. it was created using HTML, CSS and JavaScript.">
+  <meta name="author" content="Sofiia Trokhymchuk">
+
+  <meta property="og:title" content="JS Calculator">
+  <meta property="og:description"
+    content="This is a simple calculator that supports basic arithmetical operations. it was created using HTML, CSS and JavaScript.">
+  <meta property="og:url" content="https://sofiiatrokhymchuk.github.io/vanilla-js-calculator/" />
+  <meta property="og:image"
+    content="https://github.com/SofiiaTrokhymchuk/vanilla-js-calculator/assets/93663923/965a7220-f437-4f08-b0be-9d6e47e0a0d5" />
+
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="calculator">
+      <div class="calculator-screen">
+        <div class="screen-result">0</div>
+        <div class="screen-input">&nbsp;</div>
+      </div>
+      <div class="buttons-container">
+        <button class="calculator-button calculator-button__functionality calculator-button__wide" id="clear"
+          data-key="functionality">
+          AC
+        </button>
+        <button class="calculator-button calculator-button__functionality calculator-button__wide" id="delete"
+          data-key="functionality">
+          DEL
+        </button>
+        <button class="calculator-button" data-key="digit">(</button>
+        <button class="calculator-button" data-key="digit">)</button>
+        <button class="calculator-button calculator-button__operator" id="mod-divide" data-key="operator">
+          %
+        </button>
+        <button class="calculator-button calculator-button__operator" id="divide" data-key="operator">
+          ÷
+        </button>
+        <button class="calculator-button" data-key="digit">7</button>
+        <button class="calculator-button" data-key="digit">8</button>
+        <button class="calculator-button" data-key="digit">9</button>
+        <button class="calculator-button calculator-button__operator" id="multiply" data-key="operator">
+          ×
+        </button>
+        <button class="calculator-button" data-key="digit">4</button>
+        <button class="calculator-button" data-key="digit">5</button>
+        <button class="calculator-button" data-key="digit">6</button>
+        <button class="calculator-button calculator-button__operator" id="substract" data-key="operator">
+          -
+        </button>
+        <button class="calculator-button" data-key="digit">1</button>
+        <button class="calculator-button" data-key="digit">2</button>
+        <button class="calculator-button" data-key="digit">3</button>
+        <button class="calculator-button calculator-button__operator" id="add" data-key="operator">
+          +
+        </button>
+        <button class="calculator-button calculator-button__wide" data-key="digit">
+          0
+        </button>
+        <button class="calculator-button">.</button>
+        <button class="calculator-button calculator-button__functionality" id="equals" data-key="functionality">
+          =
+        </button>
       </div>
     </div>
-    <script
-      async
-      type="module"
-      src="scripts/main.js"
-    ></script>
-  </body>
+  </div>
+  <script async type="module" src="scripts/main.js"></script>
+</body>
+
 </html>

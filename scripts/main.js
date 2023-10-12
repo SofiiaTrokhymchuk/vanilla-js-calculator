@@ -181,15 +181,15 @@ const isMaxInputLengthReached = function (maxLength) {
 
 const buttonsContainerHandler = function (event) {
   const currTarget = event.target;
-  const targetClasses = currTarget.className;
+  const { key } = currTarget.dataset;
 
-  if (targetClasses.includes('calculator-button__digit')) {
+  if (key === 'digit') {
     if (isMaxInputLengthReached(MAX_INPUT_LEN)) return;
     handleDigits(currTarget);
-  } else if (targetClasses.includes('calculator-button__operator')) {
+  } else if (key === 'operator') {
     if (isMaxInputLengthReached(MAX_INPUT_LEN)) return;
     handleOperators(currTarget);
-  } else if (targetClasses.includes('calculator-button__functionality')) {
+  } else if (key === 'functionality') {
     handleFunctionalities(currTarget);
   }
 
